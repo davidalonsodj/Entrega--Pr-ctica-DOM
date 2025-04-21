@@ -4,11 +4,11 @@ const products = [{'name': 'Camiseta The Duck Vibes 1', 'description': 'Confecci
 
 const container = document.getElementById('product-grid');
 
-// Obtener listas desde localStorage o iniciarlas vacías
+// Obtener localStorage o iniciarlas vacías
 let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-// Generar las tarjetas de producto
+// Generar  producto
 products.forEach((product, index) => {
   const card = document.createElement('article');
   card.classList.add('product');
@@ -60,6 +60,8 @@ document.querySelectorAll('.cart-btn').forEach(btn =>
     alert(`${producto.name} añadido al carrito.`);
   })
 );
+
+// Sección de favoritos
 const mostrarFavoritos = () => {
   const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
   const contenedor = document.getElementById('vista-dinamica');
@@ -135,5 +137,3 @@ const cerrarVistaDinamica = () => {
   document.getElementById('vista-dinamica-titulo').textContent = "";
 };
 
-// Desplazar suavemente hacia la sección dinámica
-contenedor.scrollIntoView({ behavior: "smooth" });
