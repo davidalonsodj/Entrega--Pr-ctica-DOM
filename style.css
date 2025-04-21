@@ -741,4 +741,67 @@ contact-form input:focus,
     background-color: var(--color-primario);
     color: white;
   }
+
+  .util-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+    justify-content: center;
+  }
+ #vista-dinamica.hidden {
+  display: none;
+}
+
+.vista-dinamica-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.vista-dinamica-header h2 {
+  font-size: 2rem;
+  color: var(--color-primario);
+}
+
+.cerrar-vista {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-primario);
+  transition: color 0.3s ease;
+}
+
+.cerrar-vista:hover {
+  color: #8e1e1e;
+}
+
   
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+  }
+  
+  .header-actions button {
+    background-color: var(--color-primario);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .header-actions button:hover {
+    background-color: #8e1e1e;
+  }
+  .vista-dinamica-header h2 {
+    text-align: center;
+    font-size: 3.8rem;
+    color: var(--color-primario);
+    width: 100%;
+  }
