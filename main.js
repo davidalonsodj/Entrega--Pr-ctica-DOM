@@ -2,16 +2,58 @@ const products = [{'name': 'Camiseta The Duck Vibes 1', 'description': 'Confecci
 
 const container = document.getElementById('product-grid');
 
-products.forEach(product => {
+// Obtener desde localStorage o iniciar vacío
+let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+products.forEach((product, index) => {
   const card = document.createElement('article');
   card.classList.add('product');
+
+  const isFavorito = favoritos.includes(index);
 
   card.innerHTML = `
     <img src="${product.image}" alt="${product.name}">
     <h3>${product.name}</h3>
     <p>${product.description}</p>
-    <a href="${product.link}" target="_blank" rel="noopener">Ver Producto</a>
+    <p><strong>${product.price.toFixed(2)}€</strong></p>
+    <div class="actions">
+      <button class="fav-btn" data-index="${index}">
+        ${isFavorito ? '❤️' : '🤍'}
+      </button>
+      <button class="cart-btn" data-index="${index}">
+        🛒 Añadir al carrito
+      </button>
+      <a href="${product.link}" target="_blank" rel="noopener">Ver Producto</a>
+    </div>
   `;
 
   container.appendChild(card);
 });
+
+//BOTON FAVORITO
+document.querySelectorAll('.fav-btn').forEach(btn =>
+  btn.addEventListener('click', () => {
+    const index = parseInt(btn.dataset.index);
+    favoritos = favoritos.includes(index)
+      ? favoritos.filter(i => i !== index)
+      : [...favoritos, index];
+
+    btn.textContent = favoritos.includes(index) ? '❤️' : '🤍';
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+  })
+);
+
+// BOTON CARRITO
+document.querySelectorAll('.cart-btn').forEach(btn =>
+  btn.addEventListener('click', () => {
+    const index = parseInt(btn.dataset.index);
+    const producto = products[index];
+
+    const existe = carrito.find(item => item.index === index);
+    existe ? existe.cantidad++ : carrito.push({ index, cantidad: 1 });
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    alert(`${producto.name} añadido al carrito.`);
+  })
+);
